@@ -1,0 +1,261 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns="http://www.owl-ontologies.com/araucaria4#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:aif="http://protege.stanford.edu/aif#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://www.owl-ontologies.com/araucaria4">
+  <owl:Ontology rdf:about=""/>
+  <rdfs:Class rdf:about="http://protege.stanford.edu/aif#SNode">
+    <rdfs:subClassOf>
+      <rdfs:Class rdf:about="http://protege.stanford.edu/aif#Content"/>
+    </rdfs:subClassOf>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://protege.stanford.edu/aif#INode">
+    <rdfs:subClassOf rdf:resource="http://protege.stanford.edu/aif#Content"/>
+  </rdfs:Class>
+  <owl:Class rdf:ID="ArauEdge"/>
+  <owl:Class rdf:ID="ArauEdgeSNodetoSNode">
+    <rdfs:subClassOf rdf:resource="#ArauEdge"/>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="ArauEdgeINodetoINode"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="ArauEdgeINodetoSNode"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:ID="ArauEdgeSNodetoINode"/>
+    </owl:disjointWith>
+  </owl:Class>
+  <owl:Class rdf:ID="PropertyWigmore">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="PropertyBase"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="InScheme"/>
+  <owl:Class rdf:about="#ArauEdgeINodetoINode">
+    <rdfs:subClassOf rdf:resource="#ArauEdge"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#ArauEdgeINodetoSNode"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#ArauEdgeSNodetoINode"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#ArauEdgeSNodetoSNode"/>
+  </owl:Class>
+  <owl:Class rdf:ID="PropertyPollock">
+    <rdfs:subClassOf rdf:resource="#PropertyBase"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ArauEdgeINodetoSNode">
+    <rdfs:subClassOf rdf:resource="#ArauEdge"/>
+    <owl:disjointWith rdf:resource="#ArauEdgeINodetoINode"/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#ArauEdgeSNodetoINode"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#ArauEdgeSNodetoSNode"/>
+  </owl:Class>
+  <owl:Class rdf:ID="PropertyAif">
+    <rdfs:subClassOf rdf:resource="#PropertyBase"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Role"/>
+  <owl:Class rdf:ID="PropertyToulmin">
+    <rdfs:subClassOf rdf:resource="#PropertyBase"/>
+  </owl:Class>
+  <owl:Class rdf:ID="CQAnswer"/>
+  <owl:Class rdf:ID="ArauInfo">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >General properties of the diagram.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="PropertyGraph">
+    <rdfs:subClassOf rdf:resource="#PropertyBase"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ArauEdgeSNodetoINode">
+    <owl:disjointWith rdf:resource="#ArauEdgeINodetoINode"/>
+    <owl:disjointWith rdf:resource="#ArauEdgeINodetoSNode"/>
+    <owl:disjointWith rdf:resource="#ArauEdgeSNodetoSNode"/>
+    <rdfs:subClassOf rdf:resource="#ArauEdge"/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="hasCQAnswer">
+    <rdfs:range rdf:resource="#CQAnswer"/>
+    <rdfs:domain rdf:resource="#InScheme"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="fromNode">
+    <rdfs:domain rdf:resource="#ArauEdge"/>
+    <rdfs:range rdf:resource="http://protege.stanford.edu/aif#Content"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="ofVertex">
+    <rdfs:range rdf:resource="http://protege.stanford.edu/aif#Content"/>
+    <rdfs:domain rdf:resource="#PropertyBase"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasRole">
+    <rdfs:range rdf:resource="#Role"/>
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#INode"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="belongsToScheme">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#INode"/>
+    <rdfs:range rdf:resource="#InScheme"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="toNode">
+    <rdfs:range rdf:resource="http://protege.stanford.edu/aif#Content"/>
+    <rdfs:domain rdf:resource="#ArauEdge"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="textFontSize">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#ArauInfo"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="textFontName">
+    <rdfs:domain rdf:resource="#ArauInfo"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="extentEnd">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#Content"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="vertexId">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#Content"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="refutation">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#INode"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="schemeColorGreen">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#SNode"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="inSchemeName">
+    <rdfs:domain rdf:resource="#InScheme"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="visible">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="missing">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#Content"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="schemeName">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#SNode"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="endVertexId">
+    <rdfs:domain rdf:resource="#ArauEdge"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="textBoundsStart">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#Content"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="diagramFontStyle">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="#ArauInfo"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="schemeColorAlpha">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#SNode"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="cqAnswered">
+    <rdfs:domain rdf:resource="#CQAnswer"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="diagramFontSize">
+    <rdfs:domain rdf:resource="#ArauInfo"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="inSchemeId">
+    <rdfs:domain rdf:resource="#InScheme"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="roleClass">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Role"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="textBoundsEnd">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#Content"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="startVertexId">
+    <rdfs:domain rdf:resource="#ArauEdge"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="roleElement">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Role"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="locationY">
+    <rdfs:domain rdf:resource="#PropertyBase"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="textFontStyle">
+    <rdfs:domain rdf:resource="#ArauInfo"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="selectedPointY">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#Content"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="visited">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="diagramFontName">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#ArauInfo"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="schemeColorBlue">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#SNode"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="owner">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#INode"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="text">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#Content"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="supportLabel">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#INode"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="hidingChildren">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#Content"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="cqText">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#CQAnswer"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="nodeLabel">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#INode"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="linkedArgDistance">
+    <rdfs:domain rdf:resource="#ArauEdge"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="leafCount">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#Content"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="selectedPointX">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#Content"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="schemeColorRed">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#SNode"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="extentStart">
+    <rdfs:domain rdf:resource="http://protege.stanford.edu/aif#Content"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="locationX">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    <rdfs:domain rdf:resource="#PropertyBase"/>
+  </owl:DatatypeProperty>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.3.1, Build 430)  http://protege.stanford.edu -->
