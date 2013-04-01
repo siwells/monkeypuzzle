@@ -73,6 +73,12 @@
 		<copy todir="${dist.dir}/images">
 			<fileset dir="${assets.images.dir}/"/>
 		</copy>
+		<copy todir="${dist.dir}">
+			<fileset dir="${assets.owl.dir}/"/>
+		</copy>
+		<copy todir="${dist.dir}">
+			<fileset dir="${assets.dtd.dir}/"/>
+		</copy>
 	</target>
 	
 	<!-- Create Jar -->
