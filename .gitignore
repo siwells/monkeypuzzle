@@ -1,8 +1,13 @@
 *.class
 
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.ear
+
+bin/
+build/
+dist/
+output/
 
 .DS_Store
