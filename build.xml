@@ -46,11 +46,11 @@
 	</target>
 
 	<target name="compile" depends="init">
-		<javac srcdir="${src.dir}" destdir="${build.prod.dir}">
+		<javac includeantruntime="false" srcdir="${src.dir}" destdir="${build.prod.dir}">
 			<classpath refid= "classpath" />
 			<compilerarg value="-Xlint:unchecked"/>
 		</javac>
-		<javac srcdir="${test.dir}" destdir="${build.test.dir}">
+		<javac includeantruntime="false" srcdir="${test.dir}" destdir="${build.test.dir}">
 			<classpath>
 				<fileset dir="${dist.dir}">
 					<include name="**/*.jar" />
