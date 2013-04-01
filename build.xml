@@ -20,9 +20,9 @@
 	<property name="src.dir" location="src"/>
 	<property name="test.dir" location="test"/>
 	
-	<property name="project.name" value="Araucaris" />
+	<property name="project.name" value="Araucaria" />
 	<property name="jarname" value="Araucaria3-2.jar" />
-	<property name="runclass" value="Araucaria" />
+	<property name="runclass" value="org.simonwells.monkeypuzzle.Araucaria" />
 	
 <!--	<property name="scripts.lib.classpath.string" refid="scripts.lib.classpath"/> -->
 	
