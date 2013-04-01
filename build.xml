@@ -2,6 +2,10 @@
 <project name="Araucaria" default="all" basedir=".">
 
 <!-- Project Properties -->
+	<property name="assets.dir" location="assets"/>
+	<property name="assets.dtd.dir" location="${assets.dir}/dtd"/>
+	<property name="assets.images.dir" location="${assets.dir}/images"/>
+	<property name="assets.owl.dir" location="${assets.dir}/owl"/>
 	<property name="build.dir" location="build"/>
 	<property name="build.prod.dir" location="${build.dir}/prod"/>
 	<property name="build.test.dir" location="${build.dir}/test"/>
@@ -66,6 +70,9 @@
 				</fileset>
 			</classpath>
 		</javac>
+		<copy todir="${dist.dir}/images">
+			<fileset dir="${assets.images.dir}/"/>
+		</copy>
 	</target>
 	
 	<!-- Create Jar -->
