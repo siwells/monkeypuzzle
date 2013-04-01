@@ -15,6 +15,7 @@ The following housekeeping is planned:
 * Once the src is under version control, all libs must be either added to the repo or scripted for inclusion at build/packaging.
 * If libs are added then licensing information for each lib must be included.
 * Licensing for the app must be made clear and included with both the src and release versions.
+* To avoid any problems with the Araucaria brand, the src will be taken and rebranded Monkeypuzzle inline with the requirements of the GPL
 
 The following updates are planned:
 * Export to JSON
