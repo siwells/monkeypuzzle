@@ -16,6 +16,10 @@ The following housekeeping is planned:
 * If libs are added then licensing information for each lib must be included.
 * Licensing for the app must be made clear and included with both the src and release versions.
 * To avoid any problems with the Araucaria brand, the src will be taken and rebranded Monkeypuzzle inline with the requirements of the GPL
+* Currently glyphs/icons/images etc are hardlinked into the src from a directory relative to the src directory. This should be adjusted so that:
+    * All assets are stored consistently within the project repository
+	* Builds can be consistently & reliable performed
+	* Either assets should be included within the output jar file to enable a single monkeypuzzle uber-jar distribution (ready to run without hassle of installing extra libs/dependencies) or else sufficient scripts should be included to ensure that everything runs correctly
 
 The following development activities are planned:
 * Export to JSON
@@ -25,3 +29,4 @@ The following development activities are planned:
 * Update in-app rendering to support AIF-based argument graphs rather than AML trees - I think that this should be another pane in the default view so that Monkeypuzzle supports diagrammin using the following formats as distinct approaches: AIF, AML, Toulmin, Wigmore
     * Whilst AML might be deprecated to some degree due to the relative dormancy of Araucaria over the last 5-6 years, and due to the simultaneous ascendancy of AIF, however, the simplicity of AML, pedagogical utility, it is easy and simple to use to teach the basics of argument diagramming, and the corresponding complexity of AIF mean that AML should be maintained in Monkeypuzzle for the forseeable, at least as a diagramming style.
 * Export HTML web-page containing embedded AML/AIF markup (RDF annotations/linked data schema/etc) so that arguments can be published to the web directly from Monkeypuzzle and so that those publised arguments are discoverable.
+* Integrate with OS X to get a native look & feel, e.g. menus in the right place.
