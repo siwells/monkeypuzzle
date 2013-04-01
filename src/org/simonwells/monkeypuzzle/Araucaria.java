@@ -1710,14 +1710,10 @@ public class Araucaria extends javax.swing.JFrame implements Runnable, ControlFr
     try
     {
       FileOutputStream chosenOutput = new FileOutputStream(chosenFile);
-/*      JPEGImageEncoder encoder =
-              JPEGCodec.createJPEGEncoder(chosenOutput);
-      // Retrieve a parameter to improve the quality of the JPEG image
-      com.sun.image.codec.jpeg.JPEGEncodeParam encodeParam = encoder.getDefaultJPEGEncodeParam(image);
-      encodeParam.setQuality(1.0f, false);
-      encoder.encode(image, encodeParam);
+      ImageIO.write(image, "jpg", chosenOutput);
       chosenOutput.flush();
-      chosenOutput.close();*/
+      chosenOutput.close();
+      
       setMessageLabelText("JPG image " + chosenFile.getAbsolutePath() + " saved successfully.");
     } catch (Exception e)
     {
