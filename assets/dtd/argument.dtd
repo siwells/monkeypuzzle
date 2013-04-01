@@ -1,0 +1,275 @@
+<!-- **************************************
+     *                                    *
+     *   argument.dtd                     *
+     *                                    *
+     *   XML DTD for Argument Markup      *
+     *   Version 1.5.1                    *
+     *                                    *
+     *   17 June 2004                     *
+     *                                    *
+     *   Copyright 2001, 2002, 2004       *
+     *   Chris Reed & Glenn Rowe          *
+     *   Department of Applied Computing  *
+     *   University of Dundee             *
+     *                                    *
+     *   Released under the               *
+     *   GNU General Public License       *
+     *                                    *
+     **************************************
+-->
+     
+<!-- ARG
+     Topmost element
+     TEXT and SCHEMESET children are both optional
+     The AU element, which corresponds to the root node,
+     is also optional to allow schemeset files to be valid
+     AML.
+-->
+<!ELEMENT ARG (SCHEMESET?, TEXT?, EDATA?, AU?)>
+
+<!-- TEXT
+     The original text of the argument
+-->
+<!ELEMENT TEXT (#PCDATA)>
+
+<!-- AU
+     An argument unit, composed of a proposition (a conclusion)
+     followed, optionally, by a single refutation, followed,
+     optionally, by premises arranged in either convergent or
+     linked structures in any order.
+-->
+<!ELEMENT AU (PROP, REFUTATION?, (CA | LA)*)>
+
+<!-- PROP
+     A proposition (premise or conclusion) within the argument.
+     The text is available in PROPTEXT; the INSCHEMES are 
+     the schemes of which this node is a member.
+     The TUTOR element is present if this PROP is part of a tutorial
+     question.
+     Attributes:
+        - identifier is optional; browsers should be prepared to
+          generate identifiers if they are not available in the XML.
+          If identifiers are used, they must be consistent (i.e.
+          each proposition must have unique identifier) hence ID type.
+        - missing: used to indicate premises which are left implicit.
+        - nodelabel. A label, just as for support label, but 
+          attached to the proposition node, rather than an edge.
+          Valid AML can contain either nodelabels, or supportlabels,
+          or a mixture of both, or neither. Individual applications
+          may wish to calculate one (e.g. proposition values) from
+          the other (e.g. support values), and propagate values 
+          through the graph.
+        - supportlabel. A label attached to the edge leading from the
+          node to its parent. This attribute is optional, and
+          will be ignored for the root node. Typically this
+          label takes a value drawn from a small dictionary
+          to express an evaluative position with respect to the
+          support contributed by this argument. The label can
+          also be probabilities, allowing the construction of,
+          e.g., Bayesian nets, from the AML. 
+-->
+<!ELEMENT PROP (PROPTEXT, OWNER*, INSCHEME*, ROLE*, TUTOR?)>
+<!ATTLIST PROP identifier   CDATA         #IMPLIED
+               missing      (yes | no) "no"
+               nodelabel    CDATA      #IMPLIED
+               supportlabel CDATA      #IMPLIED>
+
+<!-- ROLE
+    An optional label used to identify roles in non-Standard diagrams, such
+    as Toulmin or Wigmore.
+        - class: The diagram type (e.g. Toulmin or Wigmore)
+        - element: The node type (e.g. data, warrant, etc in Toulmin)
+-->
+<!ELEMENT ROLE EMPTY>
+<!ATTLIST ROLE class        CDATA      #REQUIRED
+               element      CDATA      #REQUIRED>
+
+<!-- PROPTEXT
+     The text associated with a given node or proposition.
+     Attributes:
+        - offset. Number of characters into text specified in TEXT
+          section to which this proposition corresponds. Optional:
+          if omitted, browsers should open the argument read-only.
+          If no TEXT section is specified, this offset should be ignored.
+          If the PROP is MISSING=YES then offset should be ignored.
+-->
+<!ELEMENT PROPTEXT (#PCDATA)>
+<!ATTLIST PROPTEXT offset CDATA #IMPLIED>
+
+<!-- OWNER
+     The name of a party who is attributed with the proposition.
+     One proposition may be owned by many parties - or may not
+     be registered as being owned by any party.
+     The details of the party are specified in the attribute -
+     notice that OWNER is an empty element and does not therefore
+     need any further data.
+     Attributes:
+        - name. The name of the party (names are assumed to be
+          unique, but one party may 'own' many propositions).
+-->
+<!ELEMENT OWNER EMPTY>
+<!ATTLIST OWNER name CDATA #REQUIRED>
+
+<!-- INSCHEME
+     A scheme of which the current proposition is a member. The
+     details of the scheme are specified in two attributes, both
+     of which are required. For multiple schemes, use one
+     INSCHEME element for each scheme. Note that INSCHEME is an
+     empty element and does not therefore need any further data.
+     Attributes:
+        - scheme. Textual name of an argument scheme which should
+          match a scheme in the scheme set used by the browser or
+          specified in the SCHEMESET section
+        - schid. Identifier to a particular scheme in this arg:
+          browsers are expected to be able to handle more than one
+          occurrence of a given scheme at a given node.
+-->
+<!ELEMENT INSCHEME (CQANS*)>
+<!ATTLIST INSCHEME scheme CDATA #REQUIRED
+                   schid  CDATA #REQUIRED>
+
+<!-- CQANS
+     A tag indicating if a critical question has been answered for this
+     instance of the scheme. Each INSCHEME should have either zero CQANS
+     tags (for backwards compatibility), or else a number equal to the
+     number of critical questions for the scheme.
+     Attributes:
+        - answered. Indicates if the question has been answered for this scheme.
+-->
+
+<!ELEMENT CQANS EMPTY>
+<!ATTLIST CQANS answered (yes | no) "no">
+
+<!-- TUTOR
+     If a PROP is part of a tutorial question in which the student
+     is required to mark up some text and build an argument tree, we
+     must allow for variable start and end points for the text within
+     a PROP. The TUTOR element contains attributes which allow these
+     endpoints to be defined.
+     Attributes:
+        - start. The offset into text specified by TEXT which is the
+          earliest point in the text at which the student is allowed to
+          start the premise. The latest start point is provided by the
+          offset attribute in PROPTEXT. It is assumed that any point
+          between TUTOR.start and PROPTEXT.offset is acceptable as a
+          starting point for the premise, even though some of these points
+          could be in the middle of a word. If 'start' is missing, it should
+          be taken to be the same as PROPTEXT.offset. (That is, there is
+          only one place that is acceptable as a start point.)
+        - end. The offset into TEXT that is last acceptable endpoint of
+          the premise. The earliest acceptable endpoint of the premise
+          is provided by PROPTEXT.offset + the length of the PCDATA component
+          of PROPTEXT. As with the start point, any point between the earliest
+          and latest acceptable endpoints is allowed as the endpoint of a
+          premise. If 'end' is missing, it should be taken to be the same as
+          PROPTEXT.offset + length(PROPTEXT).
+-->
+<!ELEMENT TUTOR EMPTY>
+<!ATTLIST TUTOR start CDATA #IMPLIED>
+<!ATTLIST TUTOR end CDATA #IMPLIED>
+
+<!-- REFUTATION
+     A proposition which expresses the converse of a proposition.
+     In a formal system, this would simply be the negation, but
+     in real language, a more flexible, individually specified
+     proposition is more appropriate. Notice that links between
+     propositions are always links of support. To characterise
+     rebutting, undercutting and refuting links, it is necessary
+     to introduce a refutation proposition. Thus if A refutes B,
+     introduce C (or not B, if you like) as the refutation of B, 
+     then support C with A. 
+-->
+<!ELEMENT REFUTATION (AU)>
+
+<!-- CA
+     A convergent argument. The PROP specified immediately previously
+     is its conclusion, and the PROP within its body is its premise.
+     A convergent arg has exactly one premise (other convergent args
+     may have the same conclusion, of course).
+-->
+<!ELEMENT CA (AU*)>
+
+<!-- LA
+     A linked argument. The PROP specified immediately previously
+     is its conclusion, and the PROPs in its body are its premises.
+     A linked argument must have two or more premises.
+-->
+<!ELEMENT LA (AU, AU+)>
+
+<!-- SCHEMESET
+     The first section of an ARG, coming before the TEXT and the 
+     structure supporting the topmost conclusion. Includes any number
+     of SCHEME definitions. There is no requirement that any or
+     all of these schemes be used in the argument that follows.
+     The Araucaria software assumes that any schemes used in the
+     argument are defined in this section.
+-->
+<!ELEMENT SCHEMESET (SCHEME)*>
+
+<!-- SCHEME
+     The definition of an argument scheme, with a name (potentially
+     used in the scheme= attribute of a PROP) and any number of
+     critical questions.
+-->
+<!ELEMENT SCHEME (NAME, FORM, CQ*)>
+
+<!-- NAME
+     The name of a scheme. These must be unique (though there may be
+     multiple occurrences of any one scheme in an argument).
+-->
+<!ELEMENT NAME (#PCDATA)>
+
+<!-- FORM
+     The description of a scheme - its premises (any number) and
+     conclusion (exactly one)
+-->
+<!ELEMENT FORM (PREMISE*, CONCLUSION)>
+
+<!-- PREMISE
+     A premise in an argumentation scheme
+-->
+<!ELEMENT PREMISE (#PCDATA)>
+
+<!-- CONCLUSION
+     The conclusion of an argumentation scheme
+-->
+<!ELEMENT CONCLUSION (#PCDATA)>
+
+<!-- CQ
+     A critical question.
+-->
+<!ELEMENT CQ (#PCDATA)>
+
+<!-- EDATA
+     Extended data, including material external to the argument.
+     All extended data is optional.
+-->
+<!ELEMENT EDATA (AUTHOR?, DATE?, SOURCE?, COMMENTS?)>
+
+<!-- AUTHOR
+     The author of this analysis (not of the original argument)
+     (Remember that a given source argument may have multiple
+     analyses)
+-->
+<!ELEMENT AUTHOR (#PCDATA)>
+
+<!-- DATE
+     The date the analysis was carried out (not the date of the
+     original argument)
+     Though not enforced by the DTD, this is assumed to be in
+     YYYY-MM-DD format.
+-->
+<!ELEMENT DATE (#PCDATA)>
+
+<!-- SOURCE
+     The original source of the argument. Can be a reference
+     (e.g. in APA style) or, if possible a URI to the material
+     online.
+-->
+<!ELEMENT SOURCE (#PCDATA)>
+
+<!-- COMMENTS
+     Offers space for a commentary on the argument, highlighting
+     non-obvious or controversial features of the analysis.
+-->
+<!ELEMENT COMMENTS (#PCDATA)>
