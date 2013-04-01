@@ -17,7 +17,8 @@ import java.awt.image.*;
 import java.awt.geom.*;
 import java.awt.font.*;
 import java.io.*;
-import com.sun.image.codec.jpeg.*;
+//import com.sun.image.codec.jpeg.*;
+import javax.imageio.ImageIO;
 
 public class FullTextPanel extends DiagramBase
 {

@@ -22,7 +22,8 @@ import javax.media.jai.*;
 import com.sun.media.jai.codec.*;
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
-import com.sun.image.codec.jpeg.*;
+//import com.sun.image.codec.jpeg.*;
+import javax.imageio.ImageIO;
 
 public class Araucaria extends javax.swing.JFrame implements Runnable, ControlFrame
 {
@@ -1707,14 +1708,14 @@ public class Araucaria extends javax.swing.JFrame implements Runnable, ControlFr
     try
     {
       FileOutputStream chosenOutput = new FileOutputStream(chosenFile);
-      JPEGImageEncoder encoder =
+/*      JPEGImageEncoder encoder =
               JPEGCodec.createJPEGEncoder(chosenOutput);
       // Retrieve a parameter to improve the quality of the JPEG image
       com.sun.image.codec.jpeg.JPEGEncodeParam encodeParam = encoder.getDefaultJPEGEncodeParam(image);
       encodeParam.setQuality(1.0f, false);
       encoder.encode(image, encodeParam);
       chosenOutput.flush();
-      chosenOutput.close();
+      chosenOutput.close();*/
       setMessageLabelText("JPG image " + chosenFile.getAbsolutePath() + " saved successfully.");
     } catch (Exception e)
     {
