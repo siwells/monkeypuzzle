@@ -10,9 +10,6 @@ package org.simonwells.monkeypuzzle;
  *
  * @author  growe
  */
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.filechooser.*;
 import java.awt.event.*;
 import java.awt.*;
 import java.awt.image.*;
@@ -20,11 +17,18 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 import javax.imageio.*;
+import javax.imageio.ImageIO;
 import javax.media.jai.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.filechooser.*;
+import javax.swing.UIManager;
+
 import com.sun.media.jai.codec.*;
+
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
-import javax.imageio.ImageIO;
+
 
 public class Araucaria extends javax.swing.JFrame implements Runnable, ControlFrame
 {
@@ -3319,6 +3323,14 @@ public class Araucaria extends javax.swing.JFrame implements Runnable, ControlFr
   public static void main(String args[])
   {
     platform();
+    try
+    {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    }
+    catch (Exception ex) {
+       System.out.println("Problem setting SystemLook&Feel - Will continue with default - no biggee");
+       ex.printStackTrace();
+    }
     
     if (processArgs(args))
     {
