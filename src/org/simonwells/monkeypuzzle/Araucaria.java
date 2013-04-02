@@ -3318,12 +3318,23 @@ public class Araucaria extends javax.swing.JFrame implements Runnable, ControlFr
    */
   public static void main(String args[])
   {
+    platform();
+    
     if (processArgs(args))
     {
       System.exit(0);
     }
     checkVersion();
     new Araucaria().setVisible(true);
+  }
+  
+  private static void platform()
+  {
+    String os = System.getProperty("os.name").toLowerCase();
+    if(os.startsWith("mac os x"))
+    {
+        System.setProperty("apple.laf.useScreenMenuBar", "true");
+    }
   }
 
   public UndoStack getUndoStack()
