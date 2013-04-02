@@ -24,7 +24,6 @@ import javax.media.jai.*;
 import com.sun.media.jai.codec.*;
 import org.xml.sax.*;
 import org.xml.sax.helpers.*;
-//import com.sun.image.codec.jpeg.*;
 import javax.imageio.ImageIO;
 
 public class Araucaria extends javax.swing.JFrame implements Runnable, ControlFrame
