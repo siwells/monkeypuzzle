@@ -14,9 +14,9 @@
 	<property name="doc.dir" location="doc"/>
 	<property name="javadoc.dir" location="doc/javadoc"/>
 	<property name="dist.dir" location="dist"/>
-  <property name="lib.dir" location="lib"/>
-  <property name="output.dir" location="output"/>
-  <property name="output.testing.dir" location="${output.dir}/testing"/>
+    <property name="lib.dir" location="lib"/>
+    <property name="output.dir" location="output"/>
+    <property name="output.testing.dir" location="${output.dir}/testing"/>
 	<property name="src.dir" location="src"/>
 	<property name="test.dir" location="test"/>
 	
@@ -35,6 +35,7 @@
         <delete dir="${build.test.dir}"/>
         <delete dir="${build.doc.dir}"/>
         <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
         <delete dir="${output.dir}"/>
         <delete dir="${test.dir}"/>
 	</target>
@@ -74,6 +75,9 @@
 				</fileset>
 			</classpath>
 		</javac>
+        <copy todir="${dist.dir}/lib">
+            <fileset dir="${lib.dir}/"/>
+        </copy>
 		<copy todir="${dist.dir}/images">
 			<fileset dir="${assets.images.dir}/"/>
 		</copy>
@@ -88,12 +92,27 @@
 	<!-- Create Jar -->
 	<target name="jar" depends="compile">
 		<jar jarfile="${dist.dir}/${jarname}" basedir="${build.prod.dir}">
+            
+
 			<manifest>
 				<attribute name="Main-Class" value="${runclass}"/>
+                <attribute name="Class-Path" value="${jar.classpath}" /> 
 			</manifest>
+
 		</jar>
+
+        <manifestclasspath property="jar.classpath" jarfile="${dist.dir}/${jarname}">
+            <classpath>
+                <fileset dir="${lib.dir}" includes="*.jar"/>
+            </classpath>
+        </manifestclasspath>
+
+            
 	</target>
-	
+
+    
+
+ 	
 	<!-- Common Classpath 
 	<path id="classpath">
 		<fileset dir="${lib.dir}">
@@ -103,7 +122,7 @@
 	
 		<path id="classpath">
 		<fileset dir="${dist.dir}">
-					<include name="**/*.jar" />
+            <include name="**/*.jar" />
 				</fileset>
 				<fileset dir="${lib.dir}">
 					<include name="**/*.jar" />
