@@ -30,9 +30,13 @@
 
     <!-- Clean-up All Directories -->
     <target name="clean">
+        <delete dir="${bin.dir}"/>
         <delete dir="${build.prod.dir}"/>
         <delete dir="${build.test.dir}"/>
         <delete dir="${build.doc.dir}"/>
+        <delete dir="${build.dir}"/>
+        <delete dir="${output.dir}"/>
+        <delete dir="${test.dir}"/>
 	</target>
 
 	<!-- Setup Target Directories -->
