@@ -24,6 +24,11 @@
 	<property name="jarname" value="Araucaria3-2.jar" />
 	<property name="runclass" value="org.simonwells.monkeypuzzle.Araucaria" />
 	
+    <path id="jar.classpath">
+        <fileset dir="dist/lib" includes="**/*.jar" />
+    </path>
+
+
 <!--	<property name="scripts.lib.classpath.string" refid="scripts.lib.classpath"/> -->
 	
 <!-- Codeflux_Utils Specific Targets -->
@@ -91,23 +96,17 @@
 	
 	<!-- Create Jar -->
 	<target name="jar" depends="compile">
-		<jar jarfile="${dist.dir}/${jarname}" basedir="${build.prod.dir}">
-            
-
-			<manifest>
-				<attribute name="Main-Class" value="${runclass}"/>
-                <attribute name="Class-Path" value="${jar.classpath}" /> 
-			</manifest>
-
-		</jar>
 
         <manifestclasspath property="jar.classpath" jarfile="${dist.dir}/${jarname}">
-            <classpath>
-                <fileset dir="${lib.dir}" includes="*.jar"/>
-            </classpath>
+            <classpath refid="jar.classpath"/>
         </manifestclasspath>
-
-            
+        
+		<jar jarfile="${dist.dir}/${jarname}" basedir="${build.prod.dir}">            
+			<manifest>
+  				<attribute name="Main-Class" value="${runclass}"/>
+                <attribute name="Class-Path" value="${jar.classpath}"/>
+			</manifest>
+		</jar>                    
 	</target>
 
     
